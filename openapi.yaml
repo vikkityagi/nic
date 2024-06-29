@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  title: Swagger User Api - OpenAPI 3.0
+  description: |-
+    This  is a sample user OpenApi project
+  # termsOfService: http://swagger.io/terms/
+  contact:
+    email: vikkityagi1998@gmail.com
+    name: To this email
+  version: 1.0.11
+servers:
+  - url: http://localhost:3002/api/v3
+paths:
+  /users:
+    post:
+      tags: 
+        - user
+      summary: Register into the system
+      description: ''
+      operationId: SignupUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/user'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/user'
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/user"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+        '201':
+          description: Created
+  /users/{user-id}:
+     get:
+      tags:
+        - user
+      summary: fetch detail from the system
+      description: ''
+      operationId: loginUser
+      parameters:
+        - in: path
+          name: user-id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/user"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+        '400':
+          description: Invalid userId supplied
+  /all:
+    get:
+      tags:
+        - user
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/user"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/user"
+        '400':
+          description: Invalid userId supplied  
+  /users/{user-id}/:
+    put:
+      tags:
+        - user
+      summary: fetch the user detail with query parameter
+      description: ''
+      operationId: EditUser
+      # parameters:
+      #   - in: query
+      #     name: userId
+      #     schema:
+      #       type: integer
+      #     description: The number of items to skip before starting to collect the result set
+      parameters:
+        - in: path
+          name: user-id
+          schema:
+            type: integer
+          required: true
+          description: fetch the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/user'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/user'
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/user"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+        '201':
+          description: Created
+  /delete/{user-id}/:
+    delete:
+      tags:
+        - user
+      parameters:
+        - in: path
+          name: user-id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/user"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+        '400':
+          description: Invalid userId supplied
+        
+          
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        firstname:
+         type: string
+        lastname:
+         type: string
+        id:
+         type: integer
+        email:
+         type: string
